@@ -1,0 +1,87 @@
+{% extends "blog/blog_base.html" %}
+
+{% block content %}
+
+      <div class="row">
+        
+          <div class="col-md-8 offset-md-2">
+            <h1 class="text-center">{{ post.title }}</h1>
+          {% if post.img %} <img class="img-responsive img-rounded text-center" style="margin:2em;width:100%" src="{{ post.img.url }}">  {% endif %}
+          <p class="blogcontent">{{ post.text|safe }}</p>
+
+          </div>
+         
+        <!--close the row-->
+        </div>
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          {% for comment in post.comments.all %}
+            {% if user.is_authenticated or comment.approved_comment %}
+            <hr>
+                <div class="date">
+                    {{ comment.created_date }}
+                    {% if not comment.approved_comment %}
+                        <a class="btn btn-default removebtn" href="{% url "comment_remove" pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a class="btn btn-default okbtn" href="{% url "comment_approve" pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+                    {% endif %}
+                </div>
+                <strong>{{ comment.author }}</strong>
+                <p class="comment">{{ comment.text|safe }}</p>
+              {% endif %}
+              {% if forloop.last %}
+
+              <h3 class="title">New Comment</h3>
+                <form method="POST" class="post-form" id="commentform" >{% csrf_token %}
+                  <p><label for="id_author">Author:</label> <input id="id_author" maxlength="200" name="author" type="text"></p>
+                  <p><label for="id_text">Text:</label> <textarea cols="40" id="id_text" name="text" rows="20"></textarea></p>
+                  <button type="submit"
+                    class="g-recaptcha save btn btn-default"
+                    data-sitekey="6LcXVy0UAAAAACSKENWRUX-POo1H8EsdnDp-R5qx"
+                    data-callback="submitcomment">
+                    Submit
+                  </button>
+                  <script>
+                      function submitcomment(){
+                          document.getElementById('commentform').submit()
+                      }
+                  </script>
+                
+              </form>
+    </div><!--close 8col-->
+
+    </div><!--close row-->
+   <!--  </div> --><!--close container-->
+      {% endif %}
+      {% empty %}
+
+      <hr>
+       <p>No comments here yet</p>
+       <hr>
+      <h3 class="title">New Comment</h3>
+       <form method="POST" class="post-form" id="commentform">{% csrf_token %}
+          <p><label for="id_author">Author:</label> <input id="id_author" maxlength="200" name="author" type="text"></p>
+          <p><label for="id_text">Text:</label> <textarea cols="40" id="id_text" name="text" rows="10"></textarea></p>
+          <button type="submit"
+        class="g-recaptcha save btn btn-default"
+        data-sitekey="6LcXVy0UAAAAACSKENWRUX-POo1H8EsdnDp-R5qx"
+        data-callback="submitcomment">
+        Submit
+        </button>
+        <script>
+        function submitcomment(){
+            document.getElementById('commentform').submit()
+        }
+    </script>
+         
+      </form>
+    </div><!--close 8col-->
+
+    </div><!--close row-->
+
+      {% endfor %}
+          </div>
+
+        </div>
+       
+
+{% endblock %}

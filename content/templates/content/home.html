@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block page-content %}
+{% for post in header %}
+{% if forloop.first %}
+
+<div class="page-header" data-parallax="true" style="background-image: url({{ post.background_image.url }});">
+    <div class="filter"></div>
+    <div class="container">
+        <div class="motto text-center">
+            <h1>{{ post.title }}</h1>
+            <h3>{{ post.subtitle }}</h3>
+            <br />
+            <a href="{{ post.link }}" class="btn btn-outline-neutral btn-round"><i class="fa fa-play"></i>{{ post.button_text }}</a>
+            <a href="{{ post.link2 }}" ><button type="button" class="btn btn-outline-neutral btn-round">{{ post.button_text2 }}</button></a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+<div class="main">
+    <div class="section text-center">
+        <div class="container">
+                <div class="owner">
+                        <div class="avatar">
+                            <img style="max-width: 100%; margin:10;" src="{% static 'images/CenturionShield.png' %}" alt="Centurion MSC Logo Sheild" class="img-no-padding img-responsive">
+                        </div>
+                    </div>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for post in subhead %}
+                        {% if forloop.first %}
+                    <h2 class="title">{{ post.title }}</h2>
+                    <h5 class="description">{{ post.subtitle }} </h5>
+                    <br>
+                    <a href="{{ post.link }}" class="btn btn-danger btn-round">{{ post.button_text }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <br/><br/>
+        </div>
+    </div>
+    <div class="" id="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                    {% for image in carousel_image %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class=" {% if forloop.first %}active{% endif %}"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                {% for image in carousel_image %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}" style="background-image: url({{ image.image.url }})">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{ image.title }}</h3>
+                        <p>{{ image.carousel_text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+        </div>
+    </div>
+    <div class="section text-center">
+        <div class="container">
+            <h2 class="title"><a href"/blog">Recent News</a></h2>
+            <div class="row">
+
+                {% for post in blog %} {% if forloop.first %}
+                <div class="col-lg-5 ">
+                    <img class="img-responsive" src="{{ post.img.url }}">
+                </div>
+                {% endif %} {% endfor %}
+                <div class="col-lg-7 ">
+                    {% for post in blog %}
+                    <h3 class="title"><a href="{% url 'post_detail' pk=post.pk %}" class="commenta">{{ post.title }}</a> </h3>
+                    <h5 class="description">{{ post.text|safe|truncatewords:10 }} </h5>
+                    <br> {% endfor %}
+                </div>
+            </div>
+        </div>
+        <br/><br/>
+    </div>
+    <div id="events" class="section section-dark text-center">
+        <div class="container">
+            <h2 class="title">Upcoming Events</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h4 class="card-title text-white">{{ event.title }} on {{ event.start_time|date:"D M d Y" }}</h4>
+                    <div class="card card-profile card-plain">
+
+                        <a href="#">
+                                    {% if event.poster %}
+                                <embed src="{{ event.poster.url }}" width="550" height="880" type='application/pdf'>
+                                    {% elif event.image %}
+                                    <img src="{{ event.image.url }}" alt="{{ event.title }} image" />
+                                    {% endif %}
+                            </a>
+                        <h5 class="text-white">{{ event.text|safe }}</h6>
+                            <a href="{{ event.link }}" class="btn btn-danger btn-round">{{ event.button_text }}</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock page-content %}

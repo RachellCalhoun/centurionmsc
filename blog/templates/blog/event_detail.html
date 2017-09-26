@@ -1,0 +1,24 @@
+{% extends "blog/blog_base.html" %}
+
+{% block content %}
+
+      <div class="row">
+            <div class="col-md-8 offset-md-2">
+                    <h2 class="card-title text-center">{{ event.title }} on {{ event.start_time|date:"D M d Y" }}</h2>
+                    <div class="card card-profile card-plain">
+
+                        <a href="#">
+                                    {% if event.poster %}
+                                <embed src="{{ event.poster.url }}" width="550" height="880" type='application/pdf'>
+                                    {% elif event.image %}
+                                    <img src="{{ event.image.url }}" alt="{{ event.title }} image" />
+                                    {% endif %}
+                            </a>
+                        {{ event.text|safe }}
+                            <a href="{{ event.link }}" class="btn btn-danger btn-round">{{ event.button_text }}</a>
+
+                    </div>
+                </div>
+    </div>
+
+{% endblock %}

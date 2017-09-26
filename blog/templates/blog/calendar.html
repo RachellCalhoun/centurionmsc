@@ -1,0 +1,72 @@
+{% extends "blog/blog_base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+           
+                    <div style="margin-top:3em;" id='calendar'></div>
+                
+        </div>
+    </div>
+
+
+
+{% endblock content %}
+
+    {% block scripts %}
+    
+    <script src="{% static 'js/lib/moment.min.js'%}"></script>
+    <script src="{% static 'js/lib/fullcalendar.min.js'%}"></script>
+    
+    <script>
+            $(document).ready(function() {
+        
+              $('#calendar').fullCalendar({
+                header: {
+                  left: 'prev',
+                  center: 'title',
+                  right: 'today, next'
+                },
+                eventLimit: true, // allow "more" link when too many events
+                eventRender: function(event, element, view) {
+                    if(event.img){
+                        if(event.allDay){
+                            $(element).find('span:first').before('<img style="display:block;width:100%;min-height:132px;" src="'+event.img+'" />');
+                        }else{
+                            $(element).find('.fc-time').before('<img style="display:block;width:100%;min-height:132px;" src="'+event.img+'" />');
+                        }
+                    }
+                },
+                
+                windowResize: function(view) {
+                  setTimeout(function(){
+                    $( ".fc-rigid" ).each( function(){
+                      var h = $(this).children('.fc-content-skeleton').height() + 10;
+                      $(this).css('height', h);
+                    });
+                  }, 300);
+                },
+                events: [
+                
+               
+                {% for event in events %}
+                
+                  {
+                    'title': "{{ event.title }}",
+                    'start': "{% if event.start_time %}{{event.start_time|date:'c'}}{% endif %}",
+                    'end': "{% if event.end_time %}{{event.end_time|date:'c'}}{% endif %}",
+                    'url': "{% url "event_detail" pk=event.pk %}",
+                    'image':  "{{ event.img }}",
+                  },
+                {% endfor %}
+                ]
+              });
+        
+            });
+        </script>
+        
+        
+        {% endblock %}
