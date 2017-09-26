@@ -77,7 +77,7 @@
 
                 {% for post in blog %} {% if forloop.first %}
                 <div class="col-lg-5 ">
-                    <img class="img-responsive" src="{{ post.img.url }}">
+                    <img class="img-responsive" style="max-width:100%;" src="{{ post.img.url }}">
                 </div>
                 {% endif %} {% endfor %}
                 <div class="col-lg-7 ">
@@ -91,15 +91,18 @@
         <br/><br/>
     </div>
     {% endif %}
+    {% if event %}
     <div id="events" class="section section-dark text-center">
         <div class="container">
-            <h2 class="title">Upcoming Events</h2>
+            <a href="/events"><h2 class="title">Upcoming Events</h2></a>
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <h4 class="card-title text-white">{{ event.title }} on {{ event.start_time|date:"D M d Y" }}</h4>
+                   <a href="{% url "event_detail" pk=event.pk %}">
+                        <h4 class="card-title text-white">{{ event.title }} on {{ event.start_time|date:"D M d Y" }}</h4>
+                    </a>
                     <div class="card card-profile card-plain">
 
-                        <a href="#">
+                        <a href="{{ event.post.url }}">
                                     {% if event.poster %}
                                 <embed src="{{ event.poster.url }}" width="550" height="880" type='application/pdf'>
                                     {% elif event.image %}
@@ -114,5 +117,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock page-content %}

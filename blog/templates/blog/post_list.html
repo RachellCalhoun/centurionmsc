@@ -6,7 +6,7 @@
 
       
       <div class="col-md-8 offset-md-2">
-
+        {% if posts %}
         {% for post  in  posts %}
         <div  class="text-center">
           <a href="{% url "post_detail" pk=post.pk %}"><h1>{{ post.title }}</h1></a>
@@ -19,8 +19,10 @@
           <a href="{% url 'post_detail' pk=post.pk %}" class="comment">Comments: {{ post.approved_comments.count }}</a>
         </div>
         {% endfor %}
-
-      </div><!--close row-->
+        {% else %}
+        <<h1>No posts yet, check back soon! </h1>
+        {% endif %}
+      </div>
      </div>
     </div>
   
