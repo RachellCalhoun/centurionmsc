@@ -83,7 +83,7 @@
                 <div class="col-lg-7 ">
                     {% for post in blog %}
                     <h3 class="title"><a href="{% url 'post_detail' pk=post.pk %}" class="commenta">{{ post.title }}</a> </h3>
-                    <h5 class="description">{{ post.text|safe|truncatewords:10 }} </h5>
+                    <p class="description">{{ post.text|safe|truncatewords:10 }} </p>
                     <br> {% endfor %}
                 </div>
             </div>
