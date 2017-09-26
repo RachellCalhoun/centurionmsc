@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block page-content %}
+{% block header %}
     <div class="wrapper">
         <div class="page-header page-header-xs" data-parallax="true" style="background-image: url({% static 'img/martial-arts.jpg' %});">
 			<div class="filter"></div>
@@ -12,6 +13,7 @@
                                 <img style="max-width: 100%; margin:10;" src="{% static 'images/CenturionShield.png' %}" alt="Centurion MSC Logo Sheild" class="img-no-padding img-responsive">
                             </div>
                     </div>
+        {% endblock header %}
         {% block content %}
         {% endblock content %}
     </div>
