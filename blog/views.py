@@ -25,11 +25,11 @@ def post_detail(request, pk):
 
 
 def event_list(request):
-    events = Event.objects.filter(date__gte=timezone.now()).order_by('-start_time')
+    events = Event.objects.filter(start_time__gte=timezone.now()).order_by('start_time')
     return render(request,'blog/event_list.html',{'events': events})
 
 def event_calendar(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(start_time__gte=timezone.now()).order_by('start_time')
     return render(request,'blog/calendar.html',{'events': events})
 
 def event_detail(request, pk):

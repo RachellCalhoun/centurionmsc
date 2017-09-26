@@ -76,7 +76,9 @@
                     'image':  "{{ event.img }}",
                   },
                 {% endfor %}
-                ]
+                ], 
+                defaultDate: "{% for event in events %}{% if forloop.first %}{{event.start_time|date:'c'}}{% endif %}{% endfor %}",
+
               });
         
             });
