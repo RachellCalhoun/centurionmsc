@@ -132,9 +132,21 @@ USE_TZ = True
 
 
 if DEPLOY:
-    # Update database configuration with $DATABASE_URL.
+    ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'centurion',
+            'USER': 'name',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
+
 
 
 
@@ -154,10 +166,10 @@ TINYMCE_DEFAULT_CONFIG = {
 TINYMCE_SPELLCHECKER = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # Extra places for collectstatic to find static files.
 
