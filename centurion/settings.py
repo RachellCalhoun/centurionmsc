@@ -138,28 +138,39 @@ USE_TZ = True
 
 
 if DEPLOY:
-    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+    import dj_database_url
 
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-    STATIC_URL = '/static/'
+    ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
-    MEDIA_URL = '/uploads/'
-    MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
 
-    # Extra places for collectstatic to find static files.
-    STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
-    )
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'centurionmsc',
+            'USER': 'name',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+
+
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
-    MEDIA_URL = '/uploads/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
     
 
 TINYMCE_DEFAULT_CONFIG = {
