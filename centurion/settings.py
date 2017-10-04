@@ -137,18 +137,6 @@ if DEPLOY:
     DATABASES['default'].update(db_from_env)
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
-MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,xhtmlxtras,spellchecker,paste,searchreplace, save, advhr, advimage, advlink, emotions, iespell, insertdatetime, preview",
@@ -164,3 +152,13 @@ TINYMCE_DEFAULT_CONFIG = {
 
 }
 TINYMCE_SPELLCHECKER = True
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
+
+# Extra places for collectstatic to find static files.
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
