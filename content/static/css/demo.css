@@ -240,9 +240,7 @@
 .demo-height .motto{
     padding-top: 20% !important;
 }
-.demo-header-image{
-    background-image: url(' {% static "img/daniel-olahh.jpg" %}');
-}
+
 .demo-header .motto{
     color: #FFFFFF;
     padding-top: 15%;
