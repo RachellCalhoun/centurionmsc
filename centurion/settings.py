@@ -133,6 +133,7 @@ USE_TZ = True
 if DEPLOY:
     import dj_database_url
 
+    # Allow all host headers
     ALLOWED_HOSTS = ['*']
 
 
