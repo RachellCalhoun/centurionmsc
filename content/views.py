@@ -9,7 +9,12 @@ def home(request):
     carousel_image = CarouselImage.objects.all()
     icons = HomeIcon.objects.all()
     subhead = SubHeader.objects.all()
-    event = Event.objects.filter(start_time__gte=timezone.now()).order_by('start_time')[0]
-    
+    if Event:
+        try:
+            event = Event.objects.filter(start_time__gte=timezone.now()).order_by('start_time')[0]
+        except:
+            event = ''
+    else:
+        event = ''
     blog = Post.objects.filter(published_date__lte=timezone.now())[:2]
     return render(request, 'content/home.html', {'header': header, 'blog': blog, 'event': event, 'subhead': subhead, 'carousel_image': carousel_image, 'icons': icons})
