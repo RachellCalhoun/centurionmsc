@@ -70,7 +70,7 @@ body {
 
 /*home page, landing page*/
 .homebackground {
-  background: url("../images/tracking.jpg") no-repeat top center;
+  background: url(" {% static '/images/tracking.jpg' %}") no-repeat top center;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -334,7 +334,7 @@ iframe {
 @media (min-width: 992px) {
 
   .homebackground {
-    background: url("../images/tracking.jpg") no-repeat top center fixed;
+    background: url("{% static '/images/tracking.jpg' %}") no-repeat top center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
