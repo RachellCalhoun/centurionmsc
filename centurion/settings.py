@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import dj_database_url
 
 
 DEPLOY = os.getenv('DEPLOY') != 'HEROKU'
@@ -131,8 +132,16 @@ USE_TZ = True
 
 
 if DEPLOY:
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'djangogirls',
+            'USER': 'name',
+            'PASSWORD': '',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
