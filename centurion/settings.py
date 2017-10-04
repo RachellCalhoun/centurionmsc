@@ -32,14 +32,14 @@ else:
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['centurionmsc.pythonanywhere.com', 'centurionmsc.com', 'centurionmsc.herokuapp.com']
+    ALLOWED_HOSTS = ['centurionmsc.pythonanywhere.com', 'centurionmsc.com', '.herokuapp.com']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SITE_ID = 1
+SITE_ID = 0
 
 # Application definition
 
