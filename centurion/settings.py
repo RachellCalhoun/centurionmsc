@@ -165,9 +165,9 @@ TINYMCE_DEFAULT_CONFIG = {
 TINYMCE_SPELLCHECKER = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 # Extra places for collectstatic to find static files.
