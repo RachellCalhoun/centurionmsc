@@ -144,9 +144,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
 
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+
 
 
 TINYMCE_DEFAULT_CONFIG = {
