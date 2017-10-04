@@ -56,8 +56,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,29 +132,23 @@ USE_TZ = True
 
 
 if DEPLOY:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'djangogirls',
-            'USER': 'name',
-            'PASSWORD': '',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
-    }
-
+    # Update database configuration with $DATABASE_URL.
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'uploads')
 
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
 
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 TINYMCE_DEFAULT_CONFIG = {
     'plugins': "table,xhtmlxtras,spellchecker,paste,searchreplace, save, advhr, advimage, advlink, emotions, iespell, insertdatetime, preview",
