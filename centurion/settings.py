@@ -23,7 +23,7 @@ DEBUG = os.getenv('DJANGO_DEBUG') != 'FALSE'
 # SECURITY WARNING: keep the secret key used in production secret!
 if DEBUG:
     SECRET_KEY = '$dn+%59yjby20dr8e#(&cl4=38i_$-@hp8bm)x=-ln9i^-is89'
-     ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['*']
 else:
     SECRET_KEY = os.getenv('SECRET_KEY')
     ALLOWED_HOSTS = ['centurionmsc.pythonanywhere.com', 'centurionmsc.com', '.herokuapp.com']
@@ -131,22 +131,6 @@ USE_TZ = True
 
 
 if DEPLOY:
-    import dj_database_url
-
-    # Allow all host headers
-    ALLOWED_HOSTS = ['*']
-
-
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': 'centurionmsc',
-    #         'USER': 'name',
-    #         'PASSWORD': '',
-    #         'HOST': 'localhost',
-    #         'PORT': '',
-    #     }
-    # }
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 
