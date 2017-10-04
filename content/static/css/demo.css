@@ -241,7 +241,7 @@
     padding-top: 20% !important;
 }
 .demo-header-image{
-    background-image: url('{% static "../img/city.jpg" %}');
+    background-image: url('../img/city.jpg');
 }
 .demo-header .motto{
     color: #FFFFFF;
